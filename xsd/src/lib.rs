@@ -1,16 +1,11 @@
-#[derive(Debug, Clone, PartialEq)]
-pub enum Element {
-    Simple { name: String, type_name: String },
-    Complex(ComplexType),
-}
+mod errors;
+mod parse;
+mod types;
 
-#[derive(Debug, Clone, PartialEq)]
-pub struct ComplexType;
+pub use errors::ParseError;
+pub use parse::parse_from_reader;
+pub use types::*;
 
-#[derive(Debug, Clone, PartialEq)]
-pub struct Sequence(Vec<Element>);
-
-#[derive(Debug, Clone, PartialEq)]
-pub struct Schema {
-    pub elements: Vec<Element>,
+pub fn parse(src: &str) -> Result<Schema, ParseError> {
+    parse_from_reader(src.as_bytes())
 }
