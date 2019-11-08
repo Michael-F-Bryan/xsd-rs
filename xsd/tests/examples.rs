@@ -13,10 +13,10 @@ fn read_the_note_xsd() {
         elements: vec![Element {
             name: String::from("note"),
             body: ElementType::Complex(ComplexType::sequence(vec![
-                Element::simple("to", "string"),
-                Element::simple("from", "string"),
-                Element::simple("heading", "string"),
-                Element::simple("body", "string"),
+                Element::simple("to", "xs:string"),
+                Element::simple("from", "xs:string"),
+                Element::simple("heading", "xs:string"),
+                Element::simple("body", "xs:string"),
             ])),
         }],
     };
