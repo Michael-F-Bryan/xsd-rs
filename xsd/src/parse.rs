@@ -14,7 +14,7 @@ pub fn parse_from_reader<R: Read>(reader: R) -> Result<Schema, ParseError> {
 fn find_schema<R: Read>(reader: &mut EventReader<R>) -> Result<Schema, ParseError> {
     loop {
         match reader.next()? {
-            Event::StartElement { name, .. } if name.local_name == "schema" => {
+            Event::StartElement { ref name, .. } if name.local_name == "schema" => {
                 return parsing_schema_tag(reader);
             }
             _ => {}
@@ -66,7 +66,7 @@ fn parse_element_tag<R: Read>(
 fn find_complex_type_tag<R: Read>(reader: &mut EventReader<R>) -> Result<ComplexType, ParseError> {
     loop {
         match reader.next()? {
-            Event::StartElement { name, .. } => {
+            Event::StartElement { ref name, .. } => {
                 expect_name(&name, "complexType", reader.position())?;
                 return parse_complex_type_tag(reader);
             }
@@ -78,7 +78,7 @@ fn find_complex_type_tag<R: Read>(reader: &mut EventReader<R>) -> Result<Complex
 fn parse_complex_type_tag<R: Read>(reader: &mut EventReader<R>) -> Result<ComplexType, ParseError> {
     loop {
         match reader.next()? {
-            Event::StartElement { name, .. } => {
+            Event::StartElement { ref name, .. } => {
                 let complex = match name.local_name.as_str() {
                     "sequence" => ComplexType::from(parse_sequence(reader)?),
                     _ => unimplemented!(),
