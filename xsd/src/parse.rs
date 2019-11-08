@@ -1,104 +1,127 @@
-use crate::{Element, ParseError, Schema};
+use crate::{ComplexType, Element, ParseError, Schema, Sequence};
 use std::io::Read;
 use xml::attribute::OwnedAttribute;
 use xml::common::{Position, TextPosition};
+use xml::name::OwnedName;
 use xml::reader::{EventReader, XmlEvent as Event};
 
 pub fn parse_from_reader<R: Read>(reader: R) -> Result<Schema, ParseError> {
     let mut events = EventReader::new(reader);
-    let mut pda = PushdownAutomata::empty();
 
-    while !pda.finished() {
-        let ev = events.next()?;
-        dbg!(&pda.stack);
-        pda.process_event(ev, events.position())?;
-    }
-
-    Ok(pda.schema)
+    find_schema(&mut events)
 }
 
-#[derive(Debug)]
-struct PushdownAutomata {
-    // the schema we're building.
-    schema: Schema,
-    stack: Vec<Box<dyn State>>,
-}
-
-impl PushdownAutomata {
-    fn empty() -> PushdownAutomata {
-        PushdownAutomata {
-            schema: Schema::default(),
-            stack: vec![Box::new(ReadingSchema)],
-        }
-    }
-
-    fn process_event(&mut self, event: Event, pos: TextPosition) -> Result<(), ParseError> {
-        let PushdownAutomata {
-            ref mut schema,
-            ref mut stack,
-        } = self;
-
-        let cont = stack
-            .last_mut()
-            .expect("We should always have a state")
-            .process_event(event, pos);
-
-        match cont {
-            Continuation::Continue => {}
-            Continuation::Pop => {
-                stack
-                    .pop()
-                    .expect("we should always have a state")
-                    .on_pop(schema);
+fn find_schema<R: Read>(reader: &mut EventReader<R>) -> Result<Schema, ParseError> {
+    loop {
+        match reader.next()? {
+            Event::StartElement { name, .. } if name.local_name == "schema" => {
+                return parsing_schema_tag(reader);
             }
-            Continuation::Push(new_state) => stack.push(new_state),
-            Continuation::Error(err) => return Err(err),
-        }
-
-        Ok(())
-    }
-
-    fn finished(&self) -> bool {
-        self.stack.is_empty()
-    }
-}
-
-trait State: std::fmt::Debug {
-    fn process_event(&mut self, _event: Event, _pos: TextPosition) -> Continuation;
-
-    fn on_pop(&mut self, _schema: &mut Schema) {}
-}
-
-/// Within the `<xs:schema>` tag.
-#[derive(Debug, Copy, Clone)]
-struct ReadingSchema;
-
-impl ReadingSchema {
-    fn on_start_element(self, attributes: &[OwnedAttribute], pos: TextPosition) -> Continuation {
-        let name = match expect_attr(&attributes, "name", pos) {
-            Ok(a) => a.to_string(),
-            Err(e) => return Continuation::Error(e),
-        };
-
-        match find_attr(&attributes, "type") {
-            Some(type_name) => Continuation::Push(Box::new(ReadSimpleElement {
-                name,
-                type_name: type_name.to_string(),
-            })),
-            None => Continuation::Push(Box::new(ExpectingComplexElement { name })),
+            _ => {}
         }
     }
 }
 
-impl State for ReadingSchema {
-    fn process_event(&mut self, event: Event, pos: TextPosition) -> Continuation {
-        match event {
-            Event::EndElement { name } if name.local_name == "schema" => Continuation::Pop,
+fn parsing_schema_tag<R: Read>(reader: &mut EventReader<R>) -> Result<Schema, ParseError> {
+    let mut schema = Schema::default();
+
+    loop {
+        match reader.next()? {
             Event::StartElement {
                 name, attributes, ..
-            } if name.local_name == "element" => self.on_start_element(&attributes, pos),
-            _ => Continuation::Continue,
+            } => {
+                expect_name(&name, "element", reader.position())?;
+                schema
+                    .elements
+                    .push(parse_element_tag(reader, &attributes)?);
+            }
+            Event::EndElement { name } => {
+                expect_name(&name, "schema", reader.position())?;
+                return Ok(schema);
+            }
+            _ => {}
         }
+    }
+}
+
+fn parse_element_tag<R: Read>(
+    reader: &mut EventReader<R>,
+    attributes: &[OwnedAttribute],
+) -> Result<Element, ParseError> {
+    let name = expect_attr(attributes, "name", reader.position())?.to_string();
+
+    match find_attr(attributes, "type") {
+        Some(type_name) => {
+            reader.to_end("element")?;
+            Ok(Element::simple(name, type_name))
+        }
+        None => {
+            let complex = find_complex_type_tag(reader)?;
+            reader.to_end("element")?;
+            return Ok(Element::complex(name, complex));
+        }
+    }
+}
+
+fn find_complex_type_tag<R: Read>(reader: &mut EventReader<R>) -> Result<ComplexType, ParseError> {
+    loop {
+        match reader.next()? {
+            Event::StartElement { name, .. } => {
+                expect_name(&name, "complexType", reader.position())?;
+                return parse_complex_type_tag(reader);
+            }
+            _ => {}
+        }
+    }
+}
+
+fn parse_complex_type_tag<R: Read>(reader: &mut EventReader<R>) -> Result<ComplexType, ParseError> {
+    loop {
+        match reader.next()? {
+            Event::StartElement { name, .. } => {
+                let complex = match name.local_name.as_str() {
+                    "sequence" => ComplexType::from(parse_sequence(reader)?),
+                    _ => unimplemented!(),
+                };
+                reader.to_end("complexType")?;
+                return Ok(complex);
+            }
+            _ => {}
+        }
+    }
+}
+
+fn parse_sequence<R: Read>(reader: &mut EventReader<R>) -> Result<Sequence, ParseError> {
+    let mut elements = Vec::new();
+
+    loop {
+        match reader.next()? {
+            Event::StartElement {
+                name, attributes, ..
+            } => match name.local_name.as_str() {
+                "element" => elements.push(parse_element_tag(reader, &attributes)?),
+                _ => unimplemented!(),
+            },
+            Event::EndElement { name } if name.local_name == "sequence" => {
+                return Ok(Sequence(elements))
+            }
+            _ => {}
+        }
+    }
+}
+
+fn expect_name(
+    name: &OwnedName,
+    expected: &'static str,
+    position: TextPosition,
+) -> Result<(), ParseError> {
+    if name.local_name.as_str() == expected {
+        Ok(())
+    } else {
+        Err(ParseError::ExpectedTag {
+            tag: expected,
+            position,
+        })
     }
 }
 
@@ -123,96 +146,17 @@ fn find_attr<'attr>(
         .map(|attr| attr.value.as_str())
 }
 
-#[derive(Debug, Clone, PartialEq)]
-struct ReadSimpleElement {
-    name: String,
-    type_name: String,
+trait ReaderExt {
+    fn to_end(&mut self, tag_name: &'static str) -> Result<(), ParseError>;
 }
 
-impl State for ReadSimpleElement {
-    fn process_event(&mut self, event: Event, _pos: TextPosition) -> Continuation {
-        match event {
-            Event::EndElement { name } if name.local_name == "element" => Continuation::Pop,
-            _ => Continuation::Continue,
-        }
-    }
-
-    fn on_pop(&mut self, schema: &mut Schema) {
-        schema
-            .elements
-            .push(Element::simple(&self.name, &self.type_name));
-    }
-}
-
-/// We're inside an `<element>` tag and are looking for a `<complexType>`.
-#[derive(Debug, Clone, PartialEq)]
-struct ExpectingComplexElement {
-    name: String,
-}
-
-impl State for ExpectingComplexElement {
-    fn process_event(&mut self, event: Event, pos: TextPosition) -> Continuation {
-        match event {
-            Event::EndElement { name } if name.local_name == "element" => Continuation::Pop,
-            Event::StartElement { name, .. } => {
-                if name.local_name == "complexType" {
-                    Continuation::Push(Box::new(ReadingComplexElement {
-                        name: name.local_name,
-                    }))
-                } else {
-                    Continuation::Error(ParseError::ExpectedTag {
-                        tag: "complexType",
-                        position: pos,
-                    })
-                }
+impl<R: Read> ReaderExt for EventReader<R> {
+    fn to_end(&mut self, tag_name: &'static str) -> Result<(), ParseError> {
+        loop {
+            match self.next()? {
+                Event::EndElement { name } if name.local_name == tag_name => return Ok(()),
+                _ => {}
             }
-            _ => Continuation::Continue,
         }
     }
-}
-
-/// We're insite a `<complexType>` and trying to figure out what type of
-/// [`ComplexType`] it is.
-#[derive(Debug, Clone, PartialEq)]
-struct ReadingComplexElement {
-    name: String,
-}
-
-impl State for ReadingComplexElement {
-    fn process_event(&mut self, event: Event, pos: TextPosition) -> Continuation {
-        match event {
-            Event::StartElement { name, .. } => match name.local_name.as_str() {
-                "sequence" => unimplemented!(),
-                _ => Continuation::Error(ParseError::ExpectedTag {
-                    tag: "sequence",
-                    position: pos,
-                }),
-            },
-            Event::EndElement { name } if name.local_name == "element" => unimplemented!(),
-            _ => Continuation::Continue,
-        }
-    }
-}
-
-#[derive(Debug, Clone, PartialEq)]
-struct ReadingSequence {
-    element_name: String,
-    items: Vec<Element>,
-}
-
-impl State for ReadingSequence {
-    fn process_event(&mut self, event: Event, pos: TextPosition) -> Continuation {
-        match event {
-            Event::StartElement { .. } => unimplemented!(),
-            _ => Continuation::Continue,
-        }
-    }
-}
-
-#[derive(Debug)]
-enum Continuation {
-    Continue,
-    Push(Box<dyn State>),
-    Pop,
-    Error(ParseError),
 }

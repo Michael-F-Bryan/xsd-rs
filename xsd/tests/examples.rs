@@ -1,3 +1,6 @@
+#[macro_use]
+extern crate pretty_assertions;
+
 use xsd::{ComplexType, Element, ElementType, Schema};
 
 #[test]
