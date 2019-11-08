@@ -16,4 +16,9 @@
     <ProjectReference Include="..\XsdCodegen\XsdCodegen.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <EmbeddedResource Include="..\..\XMLSchema.xsd" />
+    <EmbeddedResource Include="Fixtures\simple.xsd" />
+  </ItemGroup>
+
 </Project>
