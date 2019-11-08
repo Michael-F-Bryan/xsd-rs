@@ -1,0 +1,1 @@
+initSidebarItems({"enum":[["ComplexType",""],["ElementType",""],["ParseError",""]],"fn":[["parse",""],["parse_from_reader",""]],"struct":[["Element",""],["Schema",""],["Sequence",""]]});
