@@ -1,8 +1,2 @@
-[package]
-name = "xsd"
-version = "0.1.0"
-authors = ["Michael-F-Bryan <michaelfbryan@gmail.com>"]
-license = "MIT OR Apache-2.0"
-description = "Generate Rust types from an XML Schema."
-repository = "https://github.com/Michael-F-Bryan/xsd-rs"
-edition = "2018"
+[workspace]
+members = ["xsd"]
