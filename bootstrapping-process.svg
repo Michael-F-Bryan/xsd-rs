@@ -1,0 +1,494 @@
+<svg id="mermaid-1573233557405" width="847" xmlns="http://www.w3.org/2000/svg" viewBox="0  0 423.5 344.5"><style>
+
+
+
+#mermaid-1573233557405 .label {
+  font-family: 'trebuchet ms', verdana, arial;
+  font-family: var(--mermaid-font-family);
+  color: #333; }
+
+#mermaid-1573233557405 .label text {
+  fill: #333; }
+
+#mermaid-1573233557405 .node rect,
+#mermaid-1573233557405 .node circle,
+#mermaid-1573233557405 .node ellipse,
+#mermaid-1573233557405 .node polygon {
+  fill: #ECECFF;
+  stroke: #9370DB;
+  stroke-width: 1px; }
+
+#mermaid-1573233557405 .node .label {
+  text-align: center; }
+
+#mermaid-1573233557405 .node.clickable {
+  cursor: pointer; }
+
+#mermaid-1573233557405 .arrowheadPath {
+  fill: #333333; }
+
+#mermaid-1573233557405 .edgePath .path {
+  stroke: #333333;
+  stroke-width: 1.5px; }
+
+#mermaid-1573233557405 .edgeLabel {
+  background-color: #e8e8e8;
+  text-align: center; }
+
+#mermaid-1573233557405 .cluster rect {
+  fill: #ffffde;
+  stroke: #aaaa33;
+  stroke-width: 1px; }
+
+#mermaid-1573233557405 .cluster text {
+  fill: #333; }
+
+#mermaid-1573233557405 div.mermaidTooltip {
+  position: absolute;
+  text-align: center;
+  max-width: 200px;
+  padding: 2px;
+  font-family: 'trebuchet ms', verdana, arial;
+  font-family: var(--mermaid-font-family);
+  font-size: 12px;
+  background: #ffffde;
+  border: 1px solid #aaaa33;
+  border-radius: 2px;
+  pointer-events: none;
+  z-index: 100; }
+
+#mermaid-1573233557405 .actor {
+  stroke: #CCCCFF;
+  fill: #ECECFF; }
+
+#mermaid-1573233557405 text.actor {
+  fill: black;
+  stroke: none; }
+
+#mermaid-1573233557405 .actor-line {
+  stroke: grey; }
+
+#mermaid-1573233557405 .messageLine0 {
+  stroke-width: 1.5;
+  stroke-dasharray: '2 2';
+  stroke: #333; }
+
+#mermaid-1573233557405 .messageLine1 {
+  stroke-width: 1.5;
+  stroke-dasharray: '2 2';
+  stroke: #333; }
+
+#mermaid-1573233557405 #arrowhead {
+  fill: #333; }
+
+#mermaid-1573233557405 .sequenceNumber {
+  fill: white; }
+
+#mermaid-1573233557405 #sequencenumber {
+  fill: #333; }
+
+#mermaid-1573233557405 #crosshead path {
+  fill: #333 !important;
+  stroke: #333 !important; }
+
+#mermaid-1573233557405 .messageText {
+  fill: #333;
+  stroke: none; }
+
+#mermaid-1573233557405 .labelBox {
+  stroke: #CCCCFF;
+  fill: #ECECFF; }
+
+#mermaid-1573233557405 .labelText {
+  fill: black;
+  stroke: none; }
+
+#mermaid-1573233557405 .loopText {
+  fill: black;
+  stroke: none; }
+
+#mermaid-1573233557405 .loopLine {
+  stroke-width: 2;
+  stroke-dasharray: '2 2';
+  stroke: #CCCCFF; }
+
+#mermaid-1573233557405 .note {
+  stroke: #aaaa33;
+  fill: #fff5ad; }
+
+#mermaid-1573233557405 .noteText {
+  fill: black;
+  stroke: none;
+  font-family: 'trebuchet ms', verdana, arial;
+  font-family: var(--mermaid-font-family);
+  font-size: 14px; }
+
+#mermaid-1573233557405 .activation0 {
+  fill: #f4f4f4;
+  stroke: #666; }
+
+#mermaid-1573233557405 .activation1 {
+  fill: #f4f4f4;
+  stroke: #666; }
+
+#mermaid-1573233557405 .activation2 {
+  fill: #f4f4f4;
+  stroke: #666; }
+
+
+#mermaid-1573233557405 .mermaid-main-font {
+  font-family: "trebuchet ms", verdana, arial;
+  font-family: var(--mermaid-font-family); }
+
+#mermaid-1573233557405 .section {
+  stroke: none;
+  opacity: 0.2; }
+
+#mermaid-1573233557405 .section0 {
+  fill: rgba(102, 102, 255, 0.49); }
+
+#mermaid-1573233557405 .section2 {
+  fill: #fff400; }
+
+#mermaid-1573233557405 .section1,
+#mermaid-1573233557405 .section3 {
+  fill: white;
+  opacity: 0.2; }
+
+#mermaid-1573233557405 .sectionTitle0 {
+  fill: #333; }
+
+#mermaid-1573233557405 .sectionTitle1 {
+  fill: #333; }
+
+#mermaid-1573233557405 .sectionTitle2 {
+  fill: #333; }
+
+#mermaid-1573233557405 .sectionTitle3 {
+  fill: #333; }
+
+#mermaid-1573233557405 .sectionTitle {
+  text-anchor: start;
+  font-size: 11px;
+  text-height: 14px;
+  font-family: 'trebuchet ms', verdana, arial;
+  font-family: var(--mermaid-font-family); }
+
+
+#mermaid-1573233557405 .grid .tick {
+  stroke: lightgrey;
+  opacity: 0.3;
+  shape-rendering: crispEdges; }
+#mermaid-1573233557405   .grid .tick text {
+    font-family: 'trebuchet ms', verdana, arial;
+    font-family: var(--mermaid-font-family); }
+
+#mermaid-1573233557405 .grid path {
+  stroke-width: 0; }
+
+
+#mermaid-1573233557405 .today {
+  fill: none;
+  stroke: red;
+  stroke-width: 2px; }
+
+
+
+#mermaid-1573233557405 .task {
+  stroke-width: 2; }
+
+#mermaid-1573233557405 .taskText {
+  text-anchor: middle;
+  font-family: 'trebuchet ms', verdana, arial;
+  font-family: var(--mermaid-font-family); }
+
+#mermaid-1573233557405 .taskText:not([font-size]) {
+  font-size: 11px; }
+
+#mermaid-1573233557405 .taskTextOutsideRight {
+  fill: black;
+  text-anchor: start;
+  font-size: 11px;
+  font-family: 'trebuchet ms', verdana, arial;
+  font-family: var(--mermaid-font-family); }
+
+#mermaid-1573233557405 .taskTextOutsideLeft {
+  fill: black;
+  text-anchor: end;
+  font-size: 11px; }
+
+
+#mermaid-1573233557405 .task.clickable {
+  cursor: pointer; }
+
+#mermaid-1573233557405 .taskText.clickable {
+  cursor: pointer;
+  fill: #003163 !important;
+  font-weight: bold; }
+
+#mermaid-1573233557405 .taskTextOutsideLeft.clickable {
+  cursor: pointer;
+  fill: #003163 !important;
+  font-weight: bold; }
+
+#mermaid-1573233557405 .taskTextOutsideRight.clickable {
+  cursor: pointer;
+  fill: #003163 !important;
+  font-weight: bold; }
+
+
+#mermaid-1573233557405 .taskText0,
+#mermaid-1573233557405 .taskText1,
+#mermaid-1573233557405 .taskText2,
+#mermaid-1573233557405 .taskText3 {
+  fill: white; }
+
+#mermaid-1573233557405 .task0,
+#mermaid-1573233557405 .task1,
+#mermaid-1573233557405 .task2,
+#mermaid-1573233557405 .task3 {
+  fill: #8a90dd;
+  stroke: #534fbc; }
+
+#mermaid-1573233557405 .taskTextOutside0,
+#mermaid-1573233557405 .taskTextOutside2 {
+  fill: black; }
+
+#mermaid-1573233557405 .taskTextOutside1,
+#mermaid-1573233557405 .taskTextOutside3 {
+  fill: black; }
+
+
+#mermaid-1573233557405 .active0,
+#mermaid-1573233557405 .active1,
+#mermaid-1573233557405 .active2,
+#mermaid-1573233557405 .active3 {
+  fill: #bfc7ff;
+  stroke: #534fbc; }
+
+#mermaid-1573233557405 .activeText0,
+#mermaid-1573233557405 .activeText1,
+#mermaid-1573233557405 .activeText2,
+#mermaid-1573233557405 .activeText3 {
+  fill: black !important; }
+
+
+#mermaid-1573233557405 .done0,
+#mermaid-1573233557405 .done1,
+#mermaid-1573233557405 .done2,
+#mermaid-1573233557405 .done3 {
+  stroke: grey;
+  fill: lightgrey;
+  stroke-width: 2; }
+
+#mermaid-1573233557405 .doneText0,
+#mermaid-1573233557405 .doneText1,
+#mermaid-1573233557405 .doneText2,
+#mermaid-1573233557405 .doneText3 {
+  fill: black !important; }
+
+
+#mermaid-1573233557405 .crit0,
+#mermaid-1573233557405 .crit1,
+#mermaid-1573233557405 .crit2,
+#mermaid-1573233557405 .crit3 {
+  stroke: #ff8888;
+  fill: red;
+  stroke-width: 2; }
+
+#mermaid-1573233557405 .activeCrit0,
+#mermaid-1573233557405 .activeCrit1,
+#mermaid-1573233557405 .activeCrit2,
+#mermaid-1573233557405 .activeCrit3 {
+  stroke: #ff8888;
+  fill: #bfc7ff;
+  stroke-width: 2; }
+
+#mermaid-1573233557405 .doneCrit0,
+#mermaid-1573233557405 .doneCrit1,
+#mermaid-1573233557405 .doneCrit2,
+#mermaid-1573233557405 .doneCrit3 {
+  stroke: #ff8888;
+  fill: lightgrey;
+  stroke-width: 2;
+  cursor: pointer;
+  shape-rendering: crispEdges; }
+
+#mermaid-1573233557405 .milestone {
+  transform: rotate(45deg) scale(0.8, 0.8); }
+
+#mermaid-1573233557405 .milestoneText {
+  font-style: italic; }
+
+#mermaid-1573233557405 .doneCritText0,
+#mermaid-1573233557405 .doneCritText1,
+#mermaid-1573233557405 .doneCritText2,
+#mermaid-1573233557405 .doneCritText3 {
+  fill: black !important; }
+
+#mermaid-1573233557405 .activeCritText0,
+#mermaid-1573233557405 .activeCritText1,
+#mermaid-1573233557405 .activeCritText2,
+#mermaid-1573233557405 .activeCritText3 {
+  fill: black !important; }
+
+#mermaid-1573233557405 .titleText {
+  text-anchor: middle;
+  font-size: 18px;
+  fill: black;
+  font-family: 'trebuchet ms', verdana, arial;
+  font-family: var(--mermaid-font-family); }
+
+#mermaid-1573233557405 g.classGroup text {
+  fill: #9370DB;
+  stroke: none;
+  font-family: 'trebuchet ms', verdana, arial;
+  font-family: var(--mermaid-font-family);
+  font-size: 10px; }
+#mermaid-1573233557405   g.classGroup text .title {
+    font-weight: bolder; }
+
+#mermaid-1573233557405 g.classGroup rect {
+  fill: #ECECFF;
+  stroke: #9370DB; }
+
+#mermaid-1573233557405 g.classGroup line {
+  stroke: #9370DB;
+  stroke-width: 1; }
+
+#mermaid-1573233557405 .classLabel .box {
+  stroke: none;
+  stroke-width: 0;
+  fill: #ECECFF;
+  opacity: 0.5; }
+
+#mermaid-1573233557405 .classLabel .label {
+  fill: #9370DB;
+  font-size: 10px; }
+
+#mermaid-1573233557405 .relation {
+  stroke: #9370DB;
+  stroke-width: 1;
+  fill: none; }
+
+#mermaid-1573233557405 #compositionStart {
+  fill: #9370DB;
+  stroke: #9370DB;
+  stroke-width: 1; }
+
+#mermaid-1573233557405 #compositionEnd {
+  fill: #9370DB;
+  stroke: #9370DB;
+  stroke-width: 1; }
+
+#mermaid-1573233557405 #aggregationStart {
+  fill: #ECECFF;
+  stroke: #9370DB;
+  stroke-width: 1; }
+
+#mermaid-1573233557405 #aggregationEnd {
+  fill: #ECECFF;
+  stroke: #9370DB;
+  stroke-width: 1; }
+
+#mermaid-1573233557405 #dependencyStart {
+  fill: #9370DB;
+  stroke: #9370DB;
+  stroke-width: 1; }
+
+#mermaid-1573233557405 #dependencyEnd {
+  fill: #9370DB;
+  stroke: #9370DB;
+  stroke-width: 1; }
+
+#mermaid-1573233557405 #extensionStart {
+  fill: #9370DB;
+  stroke: #9370DB;
+  stroke-width: 1; }
+
+#mermaid-1573233557405 #extensionEnd {
+  fill: #9370DB;
+  stroke: #9370DB;
+  stroke-width: 1; }
+
+#mermaid-1573233557405 .commit-id,
+#mermaid-1573233557405 .commit-msg,
+#mermaid-1573233557405 .branch-label {
+  fill: lightgrey;
+  color: lightgrey;
+  font-family: 'trebuchet ms', verdana, arial;
+  font-family: var(--mermaid-font-family); }
+
+#mermaid-1573233557405 .pieTitleText {
+  text-anchor: middle;
+  font-size: 25px;
+  fill: black;
+  font-family: 'trebuchet ms', verdana, arial;
+  font-family: var(--mermaid-font-family); }
+
+#mermaid-1573233557405 .slice {
+  font-family: 'trebuchet ms', verdana, arial;
+  font-family: var(--mermaid-font-family); }
+
+#mermaid-1573233557405 g.stateGroup text {
+  fill: #9370DB;
+  stroke: none;
+  font-size: 10px;
+  font-family: 'trebuchet ms', verdana, arial;
+  font-family: var(--mermaid-font-family); }
+
+#mermaid-1573233557405 g.stateGroup text {
+  fill: #9370DB;
+  stroke: none;
+  font-size: 10px; }
+
+#mermaid-1573233557405 g.stateGroup .state-title {
+  font-weight: bolder;
+  fill: black; }
+
+#mermaid-1573233557405 g.stateGroup rect {
+  fill: #ECECFF;
+  stroke: #9370DB; }
+
+#mermaid-1573233557405 g.stateGroup line {
+  stroke: #9370DB;
+  stroke-width: 1; }
+
+#mermaid-1573233557405 .transition {
+  stroke: #9370DB;
+  stroke-width: 1;
+  fill: none; }
+
+#mermaid-1573233557405 .stateGroup .composit {
+  fill: white;
+  border-bottom: 1px; }
+
+#mermaid-1573233557405 .state-note {
+  stroke: #aaaa33;
+  fill: #fff5ad; }
+#mermaid-1573233557405   .state-note text {
+    fill: black;
+    stroke: none;
+    font-size: 10px; }
+
+#mermaid-1573233557405 .stateLabel .box {
+  stroke: none;
+  stroke-width: 0;
+  fill: #ECECFF;
+  opacity: 0.5; }
+
+#mermaid-1573233557405 .stateLabel text {
+  fill: black;
+  font-size: 10px;
+  font-weight: bold;
+  font-family: 'trebuchet ms', verdana, arial;
+  font-family: var(--mermaid-font-family); }
+
+:root {
+  --mermaid-font-family: '"trebuchet ms", verdana, arial';
+  --mermaid-font-family: "Comic Sans MS", "Comic Sans", cursive; }
+
+:root { --mermaid-font-family: "trebuchet ms", verdana, arial;}</style><style>#mermaid-1573233557405 {
+    color: rgba(0, 0, 0, 0.65);
+    font: ;
+  }</style><g></g><defs><marker id="dependencyEnd" refX="19" refY="7" markerWidth="20" markerHeight="28" orient="auto"><path d="M 19,7 L9,13 L14,7 L9,1 Z"></path></marker></defs><g id="CP" class="stateGroup" transform="translate(103,0 )" data-x-shift="103"><rect x="8" y="8" width="89" height="29" rx="5"></rect><text x="16" y="22" font-size="24" class="state-title">C# XSD Parser</text><text x="8" y="34.6" class="state-description"></text><line x1="8" y1="26" y2="26" class="descr-divider" x2="97"></line></g><g id="CG" class="stateGroup" transform="translate(93,65 )" data-x-shift="93"><rect x="8" y="8" width="109" height="29" rx="5"></rect><text x="16" y="22" font-size="24" class="state-title">C# Code Generator</text><text x="8" y="34.6" class="state-description"></text><line x1="8" y1="26" y2="26" class="descr-divider" x2="117"></line></g><g id="RP1" class="stateGroup" transform="translate(15,130 )" data-x-shift="15"><rect x="8" y="8" width="265" height="42" rx="5"></rect><text x="16" y="22" font-size="24" class="state-title">Crappy Rust XSD Parser</text><text x="8" y="34.6" class="state-description"><tspan x="16">The smallest possible parser we can generate with C#</tspan></text><line x1="8" y1="26" y2="26" class="descr-divider" x2="273"></line></g><g id="RG" class="stateGroup" transform="translate(0,208 )" data-x-shift="0"><rect x="8" y="8" width="295" height="42" rx="5"></rect><text x="16" y="22" font-size="24" class="state-title">Rust Code Generator</text><text x="8" y="34.6" class="state-description"><tspan x="16">A code generator which uses our first parser's types as input</tspan></text><line x1="8" y1="26" y2="26" class="descr-divider" x2="303"></line></g><g id="RP2" class="stateGroup" transform="translate(82.5,297.75 )" data-x-shift="82.5"><rect x="8" y="8" width="130" height="29" rx="5"></rect><text x="16" y="22" font-size="24" class="state-title">Better Rust XSD Parser</text><text x="8" y="34.6" class="state-description"></text><line x1="8" y1="26" y2="26" class="descr-divider" x2="138"></line></g><g id="RP2-note" class="state-note" transform="translate(278.5,296 )" data-x-shift="278.5"><rect x="0" y="8" height="32.5" width="137"></rect><g><text style="text-anchor: start;" class="noteText"><tspan x="10" y="25">Officially self-hosted now!</tspan></text></g></g><path d="M155.5,45L155.5,46.666666666666664C155.5,48.333333333333336,155.5,51.666666666666664,155.5,55C155.5,58.333333333333336,155.5,61.666666666666664,155.5,63.333333333333336L155.5,65" id="edge1758" class="transition" marker-end="url(#dependencyEnd)"></path><path d="M148.57692307692307,110L148.06410256410257,111.66666666666667C147.55128205128204,113.33333333333333,146.52564102564102,116.66666666666667,146.44017094017093,120C146.35470085470084,123.33333333333333,147.2094017094017,126.66666666666667,147.63675213675214,128.33333333333334L148.06410256410257,130" id="edge1759" class="transition" marker-end="url(#dependencyEnd)"></path><path d="M162.93589743589743,130L163.36324786324786,128.33333333333334C163.7905982905983,126.66666666666667,164.64529914529916,123.33333333333333,164.55982905982907,120C164.47435897435898,116.66666666666667,163.44871794871796,113.33333333333333,162.93589743589743,111.66666666666667L162.42307692307693,110" id="edge1760" class="transition" marker-end="url(#dependencyEnd)"></path><path d="M155.5,188L155.5,189.66666666666666C155.5,191.33333333333334,155.5,194.66666666666666,155.5,198C155.5,201.33333333333334,155.5,204.66666666666666,155.5,206.33333333333334L155.5,208" id="edge1761" class="transition" marker-end="url(#dependencyEnd)"></path><path d="M130.21794871794873,266L128.76495726495727,267.6666666666667C127.31196581196582,269.3333333333333,124.40598290598291,272.6666666666667,122.95299145299145,276C121.5,279.3333333333333,121.5,282.6666666666667,123.4440389294404,286.2916666666667C125.38807785888078,289.9166666666667,129.27615571776155,293.8333333333333,131.22019464720196,295.7916666666667L133.16423357664235,297.75" id="edge1762" class="transition" marker-end="url(#dependencyEnd)"></path><path d="M228.5,303.06615120274915L240.58333333333334,300.2217926689576C252.66666666666666,297.3774341351661,276.8333333333333,291.688717067583,288.9166666666667,287.17769186712485C301,282.6666666666667,301,279.3333333333333,294.78205128205127,276C288.56410256410254,272.6666666666667,276.12820512820514,269.3333333333333,269.9102564102564,267.6666666666667L263.6923076923077,266" id="edge1763" class="transition" marker-end="url(#dependencyEnd)"></path></svg>
