@@ -35,7 +35,7 @@ fn parsing_schema_tag<R: Read>(reader: &mut EventReader<R>) -> Result<Schema, Pa
                     .elements
                     .push(parse_element_tag(reader, &attributes)?);
             }
-            Event::EndElement { name } => {
+            Event::EndElement { ref name } => {
                 expect_name(&name, "schema", reader.position())?;
                 return Ok(schema);
             }
@@ -102,7 +102,7 @@ fn parse_sequence<R: Read>(reader: &mut EventReader<R>) -> Result<Sequence, Pars
                 "element" => elements.push(parse_element_tag(reader, &attributes)?),
                 _ => unimplemented!(),
             },
-            Event::EndElement { name } if name.local_name == "sequence" => {
+            Event::EndElement { ref name } if name.local_name == "sequence" => {
                 return Ok(Sequence(elements))
             }
             _ => {}
@@ -154,7 +154,7 @@ impl<R: Read> ReaderExt for EventReader<R> {
     fn to_end(&mut self, tag_name: &'static str) -> Result<(), ParseError> {
         loop {
             match self.next()? {
-                Event::EndElement { name } if name.local_name == tag_name => return Ok(()),
+                Event::EndElement { ref name } if name.local_name == tag_name => return Ok(()),
                 _ => {}
             }
         }
