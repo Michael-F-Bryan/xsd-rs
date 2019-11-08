@@ -19,6 +19,7 @@
   <ItemGroup>
     <EmbeddedResource Include="..\..\XMLSchema.xsd" />
     <EmbeddedResource Include="Fixtures\simple.xsd" />
+    <EmbeddedResource Include="Fixtures\note.xsd" />
   </ItemGroup>
 
 </Project>

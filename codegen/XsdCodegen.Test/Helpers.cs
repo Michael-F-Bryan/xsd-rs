@@ -9,6 +9,7 @@ namespace XsdCodegen.Test
     {
         public static string XsdSchema => GetResource("XMLSchema.xsd");
         public static string Simple => GetResource("simple.xsd");
+        public static string Note => GetResource("note.xsd");
 
         public static string GetResource(string name)
         {
