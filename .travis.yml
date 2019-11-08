@@ -1,9 +1,10 @@
 language: rust
-sudo: false
 cache: cargo
 
 rust:
-  - 1.34.0
+  - 1.31.0
+  - stable
+  - nightly
 
 script: 
   - cargo build --verbose
@@ -12,7 +13,7 @@ script:
 
 before_deploy:
   - cargo doc --verbose
-  - echo '<meta http-equiv="refresh" content="0; url={{crate_name}}/index.html" /> ' > target/doc/index.html
+  - echo '<meta http-equiv="refresh" content="0; url=xsd/index.html" /> ' > target/doc/index.html
   - cp -r target/doc public
 
 deploy:
@@ -23,3 +24,4 @@ deploy:
   local_dir: public
   on:
     branch: master
+    rust: nightly
